@@ -1,0 +1,35 @@
+/* ============================================================
+   Nav dropdown overlay + scroll lock
+   Requires: a div with class "nav-overlay" as a sibling of the navbar,
+   and the navbar positioned with z-index: 1000.
+   ============================================================ */
+
+/* Overlay: hidden by default, never blocks clicks while hidden */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999; /* below the navbar (1000), above page content */
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+/* Show the overlay while any dropdown is open */
+body:has(.w-dropdown-list.w--open) .nav-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.3s ease, visibility 0s;
+}
+
+/* Lock page scroll while a dropdown is open */
+html:has(.w-dropdown-list.w--open) {
+  overflow: hidden;
+}
+
+/* Stop the page shifting sideways when the scrollbar disappears */
+html {
+  scrollbar-gutter: stable;
+}
