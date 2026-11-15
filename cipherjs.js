@@ -388,6 +388,8 @@
     //                                   height where it's fully visible, 0 = off)
     //   data-ascii-fade-sides="0.15"   (fade out towards the left and right edges:
     //                                   fraction of the width from each edge, 0 = off)
+    //   data-ascii-field="off"         (no field here: put it on a header, its
+    //                                   .container or any wrapper around them)
     // ============================================================
     function initAsciiField() {
         const FONT_SIZE = 8; // px, same as Firecrawl
@@ -454,7 +456,11 @@
                 ".s_gap, header.header-main > .container, .s_cta > .container, [data-ascii-field]",
             ),
         );
-        targets.forEach(start);
+        // Opt out: data-ascii-field="off" on the section, its .container
+        // or any ancestor (e.g. a page wrapper) skips everything inside it
+        targets.forEach((box) => {
+            if (!box.closest('[data-ascii-field="off"]')) start(box);
+        });
 
         function start(box) {
             const chars = box.dataset.asciiChars || " .:-=+*x#";
