@@ -377,9 +377,7 @@
     // The section's existing background image stays as the fallback
     // (no JS / reduced motion shows a single still frame instead).
     // Optional attributes on the section:
-    //   data-ascii-chars=" .:-=+@*x#"  (lightest to densest)
-    //   data-ascii-curve="0.7"         (below 1 shows more of the denser
-    //                                   characters, 1 = linear; gaps unchanged)
+    //   data-ascii-chars=" .:-=+*x#"   (lightest to densest)
     //   data-ascii-opacity="0.22"      (character opacity, uses the text colour)
     //   data-ascii-speed="1"           (drift speed multiplier)
     //   data-ascii-avoid="h1, .button" (keep the characters away from these
@@ -465,12 +463,7 @@
         });
 
         function start(box) {
-            // "@" sits right after "+" so cluster centres reach it; the
-            // steps after it are rarely reached at the default curve
-            const chars = box.dataset.asciiChars || " .:-=+@*x#";
-            // Below 1 lifts filled cells towards the denser characters;
-            // empty cells stay empty, so the gaps don't change
-            const curve = parseFloat(box.dataset.asciiCurve || "0.7");
+            const chars = box.dataset.asciiChars || " .:-=+*x#";
             const opacity = parseFloat(box.dataset.asciiOpacity || "0.22");
             const speed = parseFloat(box.dataset.asciiSpeed || "1");
             const defaultKey = Object.keys(DEFAULTS).find((sel) =>
@@ -633,7 +626,6 @@
                             line += " ";
                             continue;
                         }
-                        if (curve !== 1) n = Math.pow(n, curve);
                         // A little per-cell shimmer so characters flicker like frames
                         if (Math.random() < 0.04)
                             n += (Math.random() - 0.5) * 0.4;
