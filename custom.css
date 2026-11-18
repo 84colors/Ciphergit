@@ -56,3 +56,23 @@ html {
 .w-nav-button.w--open .menu-icon1_line-bottom {
   transform: translateY(-8px) rotate(-45deg);
 }
+
+/* ============================================================
+   Mobile dropdown chevron: keep it centred on the label and
+   rotating in place (the toggle grew to 60px when open, with
+   items aligned to the top, so the chevron jumped while turning)
+   ============================================================ */
+@media screen and (max-width: 991px) {
+  .nav_dropdown-toggle {
+    align-items: center;
+  }
+
+  .nav_dropdown-toggle.w--open {
+    height: auto;
+  }
+
+  .nav_dropdown-toggle .dropdown-chevron {
+    display: flex;
+    flex: none;
+  }
+}
