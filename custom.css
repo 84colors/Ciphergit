@@ -16,8 +16,9 @@
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
-/* Show the overlay while any dropdown is open */
-body:has(.w-dropdown-list.w--open) .nav-overlay {
+/* Show the overlay while any dropdown is open
+   (not inside the open mobile menu: there it would cover the links) */
+body:has(.w-dropdown-list.w--open):not(:has(.w-nav-button.w--open)) .nav-overlay {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -25,7 +26,7 @@ body:has(.w-dropdown-list.w--open) .nav-overlay {
 }
 
 /* Lock page scroll while a dropdown is open */
-html:has(.w-dropdown-list.w--open) {
+html:has(.w-dropdown-list.w--open):not(:has(.w-nav-button.w--open)) {
   overflow: hidden;
 }
 
