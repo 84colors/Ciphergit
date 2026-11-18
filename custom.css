@@ -34,3 +34,25 @@ html:has(.w-dropdown-list.w--open):not(:has(.w-nav-button.w--open)) {
 html {
   scrollbar-gutter: stable;
 }
+
+/* ============================================================
+   Burger icon -> X while the mobile menu is open
+   (Webflow adds .w--open to .w-nav-button)
+   ============================================================ */
+.menu-icon1_line-top,
+.menu-icon1_line-middle,
+.menu-icon1_line-bottom {
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.w-nav-button.w--open .menu-icon1_line-top {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.w-nav-button.w--open .menu-icon1_line-middle {
+  opacity: 0;
+}
+
+.w-nav-button.w--open .menu-icon1_line-bottom {
+  transform: translateY(-8px) rotate(-45deg);
+}
