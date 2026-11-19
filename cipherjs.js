@@ -938,9 +938,51 @@
     }
 
     // ============================================================
+    // Language switcher
+    // Usage: a wrapper with [data-lang-switcher] holding links with
+    // data-locale="" (primary language) or data-locale="fr" etc. (the
+    // locale's subdirectory), plus an element with [data-lang-current].
+    // Each link is pointed at the current page in that language, so
+    // /plans becomes /fr/plans. The links keep their own href as a
+    // fallback if this script doesn't run.
+    // ============================================================
+    function initLangSwitcher() {
+        document.querySelectorAll("[data-lang-switcher]").forEach((box) => {
+            const links = [...box.querySelectorAll("[data-locale]")];
+            if (!links.length) return;
+            const locales = links
+                .map((a) => a.dataset.locale)
+                .filter(Boolean);
+
+            // Split "/fr/plans" into the locale ("fr") and the rest ("/plans")
+            const parts = location.pathname.split("/");
+            const current = locales.includes(parts[1]) ? parts[1] : "";
+            const rest =
+                (current ? "/" + parts.slice(2).join("/") : location.pathname) ||
+                "/";
+
+            links.forEach((a) => {
+                const loc = a.dataset.locale;
+                const href = loc
+                    ? "/" + loc + (rest === "/" ? "" : rest)
+                    : rest;
+                a.setAttribute("href", href);
+                const active = loc === current;
+                a.classList.toggle("is-active", active);
+                if (active) a.setAttribute("aria-current", "true");
+                else a.removeAttribute("aria-current");
+            });
+
+            const label = box.querySelector("[data-lang-current]");
+            if (label) label.textContent = (current || "en").toUpperCase();
+        });
+    }
+
+    // ============================================================
     // Init
     // ============================================================
     function init() {
+        initLangSwitcher();
         initAlertBar();
         initAsciiIcons();
         initAsciiField();
