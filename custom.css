@@ -104,3 +104,29 @@ html {
 h2.text-tagline-text {
   line-height: 120%;
 }
+
+/* ============================================================
+   Language switcher: Webflow's native Locales list marks the
+   current language with .w--current, which can't be styled
+   from the Designer's API, so it's styled here
+   ============================================================ */
+.lang-link.w--current {
+  font-weight: 600;
+  color: var(--_brading---colors--green-darker);
+}
+
+/* Native list: no bullets or indent, links stacked in the
+   dropdown and side by side in the mobile row */
+.lang-list .w-locales-items,
+.lang-inline .w-locales-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lang-inline .w-locales-list,
+.lang-inline .w-locales-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
