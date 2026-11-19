@@ -944,9 +944,9 @@
         initAlertBar();
         initAsciiIcons();
         initAsciiField();
+        initFaqLinkLabels(); // before the scramble, which labels buttons with their own text
         initButtonScramble();
         initQuotesSlider();
-        initFaqLinkLabels();
     }
 
     if (document.readyState === "loading") {
