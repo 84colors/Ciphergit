@@ -921,6 +921,23 @@
     }
 
     // ============================================================
+    // Accessible names for generic FAQ buttons ("learn more",
+    // "read the docs"...): screen readers list links out of
+    // context, so name each one after its FAQ item title.
+    // ============================================================
+    function initFaqLinkLabels() {
+        document.querySelectorAll(".faq_item .button").forEach((a) => {
+            if (a.hasAttribute("aria-label")) return;
+            const title = a.closest(".faq_item").querySelector(".faq_title");
+            if (!title) return;
+            const text = a.textContent.trim();
+            const name = title.textContent.trim();
+            const external = a.target === "_blank" ? " (opens in a new tab)" : "";
+            a.setAttribute("aria-label", text + ": " + name + external);
+        });
+    }
+
+    // ============================================================
     // Init
     // ============================================================
     function init() {
@@ -929,6 +946,7 @@
         initAsciiField();
         initButtonScramble();
         initQuotesSlider();
+        initFaqLinkLabels();
     }
 
     if (document.readyState === "loading") {

@@ -76,3 +76,31 @@ html {
     flex: none;
   }
 }
+
+/* ============================================================
+   Heading levels fixed for accessibility (no more h1->h3 or
+   h2->h4 jumps). These rules keep each heading looking exactly
+   as it did at its old level.
+   ============================================================ */
+
+/* Release notes + privacy policy: h3 -> h2 inside the rich text */
+.list-square h2 {
+  font-size: var(--_primitives---typography-scale--type-24);
+  letter-spacing: -.02em;
+  line-height: 120%;
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* Feature card titles: h4 -> h3 (small) / h2 (large) */
+.feature-sm-top_title,
+.feature-lg-top_title {
+  letter-spacing: inherit;
+  line-height: 24px;
+}
+
+/* Home logo strip tagline: h3 -> h2 */
+h2.text-tagline-text {
+  line-height: 120%;
+}
